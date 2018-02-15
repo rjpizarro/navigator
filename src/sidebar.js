@@ -13,6 +13,12 @@ import ExpandMore from 'material-ui-icons/ExpandMore';
 const styles = {
     listTextWithIcon: {
         display: 'flex',
+        alignItems: 'center'
+    },
+    borderSection: {
+        borderBottomWidth: '0.125rem',
+        width: 300,
+        borderStyle: 'ridge',
     },
     childItem: {
         paddingLeft: 25,
@@ -45,7 +51,7 @@ class AppSidebar extends Component {
 
     renderMenuOptions = (routeToRender, index) => {
         const {title, route, icon, children} = routeToRender;
-        const colorStyle = {color: this.props.textColor};
+        const colorStyle = {color: this.props.textColor, fontSize: this.props.textSize, };
         const collapseIsOpen = !!this.state[route];
 
         const Label = <Typography type="subheading" style={colorStyle}>{title}</Typography>;
@@ -61,7 +67,7 @@ class AppSidebar extends Component {
         if (children) { //generate a list with menu inside
             item = (
                 <div>
-                    <ListItem button key={`${route}-${index}`} onClick={() => this.toggleNested(route)}>
+                    <ListItem className={(this.props.showDivider) ? this.props.classes.borderSection : null} button key={`${route}-${index}`} onClick={() => this.toggleNested(route)}>
                         {ListTextWithIcon}
                         {(collapseIsOpen) ? <ExpandLess style={colorStyle}/> : <ExpandMore style={colorStyle}/>}
                     </ListItem>
@@ -73,7 +79,7 @@ class AppSidebar extends Component {
             );
         } else {
             item = (
-                <ListItem button key={`${route}-${index}`} onClick={() => this.navToRoute(route)}>
+                <ListItem className={(this.props.showDivider) ? this.props.classes.borderSection : null} button key={`${route}-${index}`} onClick={() => this.navToRoute(route)}>
                     {ListTextWithIcon}
                 </ListItem>
             )
@@ -88,6 +94,7 @@ class AppSidebar extends Component {
             sidebar: this.renderSidebarContent(),
             styles: {
                 sidebar: {
+                    width: this.props.sizeSidebar,
                     backgroundColor: this.props.sidebarBackground,
                     paddingTop: this.props.offsetTop,
                 },
@@ -114,10 +121,14 @@ AppSidebar.defaultProps = {
     sidebarBackground: '#FFF',
     pageBackground: '#859BA9',
     textColor: 'inherit',
+    showDivider: false,
+    textSize: 16,
+    sizeSidebar: 240,
 };
 
 AppSidebar.propTypes = {
     showSidebar: PropTypes.bool,
+    showDivider: PropTypes.bool,
     routes: PropTypes.arrayOf(PropTypes.shape({
         route: PropTypes.string,
         title: PropTypes.string.isRequired,
@@ -128,6 +139,8 @@ AppSidebar.propTypes = {
     sidebarBackground: PropTypes.string,
     textColor: PropTypes.string,
     offsetTop: PropTypes.number,
+    textSize: PropTypes.number,
+    sizeSidebar: PropTypes.number,
 };
 
 export default withStyles(styles)(AppSidebar);
