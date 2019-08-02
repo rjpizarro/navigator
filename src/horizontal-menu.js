@@ -1,10 +1,10 @@
 import React, { Component} from 'react';
 import PropTypes from 'prop-types';
 import Navigator from './Navigator'
-import Typography from 'material-ui/Typography';
-import {withStyles} from 'material-ui/styles';
-import Menu from 'material-ui/Menu';
-import Button from 'material-ui/Button';
+import Typography from '@material-ui/core/Typography';
+import withStyles from '@material-ui/core/styles/withStyles';
+import Menu from '@material-ui/core/Menu';
+import Button from '@material-ui/core/Button';
 
 const styles = {
     menuContainer: {
