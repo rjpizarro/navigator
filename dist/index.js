@@ -27060,6 +27060,8 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _react = __webpack_require__(2);
@@ -27162,12 +27164,18 @@ var AppSidebar = function (_Component) {
             );
             var ListTextWithIcon = _react2.default.createElement(
                 'div',
-                { className: _this.props.classes.listTextWithIcon, style: containerStyle },
+                { className: _this.props.classes.listTextWithIcon },
                 icon ? _react2.default.createElement(_List.ListItemIcon, { children: icon }) : null,
                 _react2.default.createElement(_List.ListItemText, { inset: icon, primary: Label })
             );
 
             var item = void 0;
+            var commonListItemProps = {
+                className: _this.props.showDivider ? _this.props.classes.borderSection : null,
+                button: true,
+                key: route + '-' + index,
+                style: containerStyle
+            };
 
             if (children) {
                 //generate a list with menu inside
@@ -27176,9 +27184,11 @@ var AppSidebar = function (_Component) {
                     null,
                     _react2.default.createElement(
                         _List.ListItem,
-                        { className: _this.props.showDivider ? _this.props.classes.borderSection : null, button: true, key: route + '-' + index, onClick: function onClick() {
+                        _extends({}, commonListItemProps, {
+                            onClick: function onClick() {
                                 return _this.toggleNested(route);
-                            } },
+                            }
+                        }),
                         ListTextWithIcon,
                         collapseIsOpen ? _react2.default.createElement(_ExpandLess2.default, { style: colorStyle }) : _react2.default.createElement(_ExpandMore2.default, { style: colorStyle })
                     ),
@@ -27192,9 +27202,11 @@ var AppSidebar = function (_Component) {
             } else {
                 item = _react2.default.createElement(
                     _List.ListItem,
-                    { className: _this.props.showDivider ? _this.props.classes.borderSection : null, button: true, key: route + '-' + index, onClick: function onClick() {
+                    _extends({}, commonListItemProps, {
+                        onClick: function onClick() {
                             return _this.navToRoute(route);
-                        } },
+                        }
+                    }),
                     ListTextWithIcon
                 );
             }

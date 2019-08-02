@@ -56,18 +56,27 @@ class AppSidebar extends Component {
 
         const Label = <Typography type="subheading" style={colorStyle}>{title}</Typography>;
         const ListTextWithIcon = (
-            <div className={this.props.classes.listTextWithIcon} style={containerStyle}>
+            <div className={this.props.classes.listTextWithIcon}>
                 {(icon) ? <ListItemIcon children={icon} /> : null}
                 <ListItemText inset={icon} primary={Label} />
             </div>
         );
 
         let item;
+        const commonListItemProps = {
+            className: (this.props.showDivider) ? this.props.classes.borderSection : null,
+            button: true,
+            key: `${route}-${index}`,
+            style: containerStyle
+        };
 
         if (children) { //generate a list with menu inside
             item = (
                 <div>
-                    <ListItem className={(this.props.showDivider) ? this.props.classes.borderSection : null} button key={`${route}-${index}`} onClick={() => this.toggleNested(route)}>
+                    <ListItem
+                      {...commonListItemProps}
+                      onClick={() => this.toggleNested(route)}
+                    >
                         {ListTextWithIcon}
                         {(collapseIsOpen) ? <ExpandLess style={colorStyle}/> : <ExpandMore style={colorStyle}/>}
                     </ListItem>
@@ -79,7 +88,10 @@ class AppSidebar extends Component {
             );
         } else {
             item = (
-                <ListItem className={(this.props.showDivider) ? this.props.classes.borderSection : null} button key={`${route}-${index}`} onClick={() => this.navToRoute(route)}>
+                <ListItem
+                  {...commonListItemProps}
+                  onClick={() => this.navToRoute(route)}
+                >
                     {ListTextWithIcon}
                 </ListItem>
             )
