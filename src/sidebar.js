@@ -50,13 +50,13 @@ class AppSidebar extends Component {
     };
 
     renderMenuOptions = (routeToRender, index) => {
-        const {title, route, icon, children} = routeToRender;
+        const {title, route, icon, children, containerStyle} = routeToRender;
         const colorStyle = {color: this.props.textColor, fontSize: this.props.textSize, };
         const collapseIsOpen = !!this.state[route];
 
         const Label = <Typography type="subheading" style={colorStyle}>{title}</Typography>;
         const ListTextWithIcon = (
-            <div className={this.props.classes.listTextWithIcon}>
+            <div className={this.props.classes.listTextWithIcon} style={containerStyle}>
                 {(icon) ? <ListItemIcon children={icon} /> : null}
                 <ListItemText inset={icon} primary={Label} />
             </div>
@@ -130,6 +130,7 @@ AppSidebar.propTypes = {
     showSidebar: PropTypes.bool,
     showDivider: PropTypes.bool,
     routes: PropTypes.arrayOf(PropTypes.shape({
+        containerStyle: PropTypes.object,
         route: PropTypes.string,
         title: PropTypes.string.isRequired,
         icon: PropTypes.element,
