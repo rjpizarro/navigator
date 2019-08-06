@@ -50,8 +50,9 @@ class AppSidebar extends Component {
     };
 
     renderMenuOptions = (routeToRender, index) => {
-        const {title, route, icon, children, containerStyle} = routeToRender;
-        const colorStyle = {color: this.props.textColor, fontSize: this.props.textSize, };
+        const {title, route, icon, children, containerStyle } = routeToRender;
+        const labelStyle = routeToRender.labelStyle || {};
+        const colorStyle = {color: this.props.textColor, fontSize: this.props.textSize, ...labelStyle};
         const collapseIsOpen = !!this.state[route];
 
         const Label = <Typography type="subheading" style={colorStyle}>{title}</Typography>;
@@ -143,6 +144,7 @@ AppSidebar.propTypes = {
     showDivider: PropTypes.bool,
     routes: PropTypes.arrayOf(PropTypes.shape({
         containerStyle: PropTypes.object,
+        labelStyle: PropTypes.object,
         route: PropTypes.string,
         title: PropTypes.string.isRequired,
         icon: PropTypes.element,

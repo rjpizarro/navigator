@@ -27154,7 +27154,8 @@ var AppSidebar = function (_Component) {
                 children = routeToRender.children,
                 containerStyle = routeToRender.containerStyle;
 
-            var colorStyle = { color: _this.props.textColor, fontSize: _this.props.textSize };
+            var labelStyle = routeToRender.labelStyle || {};
+            var colorStyle = _extends({ color: _this.props.textColor, fontSize: _this.props.textSize }, labelStyle);
             var collapseIsOpen = !!_this.state[route];
 
             var Label = _react2.default.createElement(
@@ -27273,6 +27274,7 @@ AppSidebar.propTypes = {
     showDivider: _propTypes2.default.bool,
     routes: _propTypes2.default.arrayOf(_propTypes2.default.shape({
         containerStyle: _propTypes2.default.object,
+        labelStyle: _propTypes2.default.object,
         route: _propTypes2.default.string,
         title: _propTypes2.default.string.isRequired,
         icon: _propTypes2.default.element,
