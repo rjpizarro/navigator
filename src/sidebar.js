@@ -52,6 +52,7 @@ class AppSidebar extends Component {
     renderMenuOptions = (routeToRender, index) => {
         const {title, route, icon, children, containerStyle } = routeToRender;
         const labelStyle = routeToRender.labelStyle || {};
+        const listItemProps = routeToRender.listItemProps || {};
         const colorStyle = {color: this.props.textColor, fontSize: this.props.textSize, ...labelStyle};
         const collapseIsOpen = !!this.state[route];
 
@@ -68,7 +69,8 @@ class AppSidebar extends Component {
             className: (this.props.showDivider) ? this.props.classes.borderSection : null,
             button: true,
             key: `${route}-${index}`,
-            style: containerStyle
+            style: containerStyle,
+            ...listItemProps,
         };
 
         if (children) { //generate a list with menu inside
@@ -149,6 +151,7 @@ AppSidebar.propTypes = {
         title: PropTypes.string.isRequired,
         icon: PropTypes.element,
         children: PropTypes.array,
+        listItemProps: PropTypes.object,
     })).isRequired,
     pageBackground: PropTypes.string,
     sidebarBackground: PropTypes.string,

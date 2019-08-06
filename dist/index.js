@@ -27155,6 +27155,7 @@ var AppSidebar = function (_Component) {
                 containerStyle = routeToRender.containerStyle;
 
             var labelStyle = routeToRender.labelStyle || {};
+            var listItemProps = routeToRender.listItemProps || {};
             var colorStyle = _extends({ color: _this.props.textColor, fontSize: _this.props.textSize }, labelStyle);
             var collapseIsOpen = !!_this.state[route];
 
@@ -27171,12 +27172,12 @@ var AppSidebar = function (_Component) {
             );
 
             var item = void 0;
-            var commonListItemProps = {
+            var commonListItemProps = _extends({
                 className: _this.props.showDivider ? _this.props.classes.borderSection : null,
                 button: true,
                 key: route + '-' + index,
                 style: containerStyle
-            };
+            }, listItemProps);
 
             if (children) {
                 //generate a list with menu inside
@@ -27278,7 +27279,8 @@ AppSidebar.propTypes = {
         route: _propTypes2.default.string,
         title: _propTypes2.default.string.isRequired,
         icon: _propTypes2.default.element,
-        children: _propTypes2.default.array
+        children: _propTypes2.default.array,
+        listItemProps: _propTypes2.default.object
     })).isRequired,
     pageBackground: _propTypes2.default.string,
     sidebarBackground: _propTypes2.default.string,
