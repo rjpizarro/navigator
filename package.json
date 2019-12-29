@@ -1,6 +1,6 @@
 {
   "name": "@yuniku/navigator",
-  "version": "1.4.0",
+  "version": "1.4.1",
   "description": "A Navigation helper for react-router",
   "main": "dist/index.js",
   "scripts": {
